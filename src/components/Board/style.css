@@ -1,0 +1,17 @@
+.board {
+    float: left;
+    width: 50%;
+}
+
+.board > ul {
+    list-style-type: none;
+}
+
+.board > ul {
+    padding: 0;
+    margin: 0;
+}
+
+.board > ul > li {
+    display: block;
+}

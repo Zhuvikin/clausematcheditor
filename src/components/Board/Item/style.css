@@ -1,0 +1,40 @@
+li.item {
+    display: block;
+    margin-bottom: 5px;
+}
+
+li.item > table {
+    width: 100%;
+}
+
+.button-add, .button-remove {
+    width: 50px;
+    text-align: center;
+    font-size: 2em;
+    line-height: 2em;
+    color: white;
+    cursor: pointer;
+}
+
+.button-add {
+    background: #8ad900;
+}
+
+.button-remove {
+    background: #e22b00;
+}
+
+.button-remove.last-item {
+    background: #ccc;
+}
+
+.item > table {
+    border: none;
+    border-collapse: collapse;
+}
+
+.item-text {
+    background: white;
+    padding: 15px;
+    font-family: "Times New Roman", Times, serif;
+}
