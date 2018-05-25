@@ -5,6 +5,10 @@ li.item {
 
 li.item > table {
     width: 100%;
+    min-width: 200px;
+    border: none;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .button-add, .button-remove {
@@ -28,13 +32,14 @@ li.item > table {
     background: #ccc;
 }
 
-.item > table {
-    border: none;
-    border-collapse: collapse;
-}
-
 .item-text {
     background: white;
+    width: 100%;
     padding: 15px;
     font-family: "Times New Roman", Times, serif;
+}
+
+li.item td > div {
+    word-wrap: break-word;
+    white-space: pre-line;
 }

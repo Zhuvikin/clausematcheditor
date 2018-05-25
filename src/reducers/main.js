@@ -40,16 +40,16 @@ export default function reducer(state = initialState, action) {
             ];
 
         case MOVE_ITEM:
-            const removed = [
+            const removedFromOldPosition = [
                 ...state.slice(0, action.fromIndex),
                 ...state.slice(action.fromIndex + 1)
             ];
             return [
-                ...removed.slice(0, action.toIndex),
+                ...removedFromOldPosition.slice(0, action.toIndex),
                 {
                     ...state[action.fromIndex]
                 },
-                ...removed.slice(action.toIndex)
+                ...removedFromOldPosition.slice(action.toIndex)
             ];
 
         default:

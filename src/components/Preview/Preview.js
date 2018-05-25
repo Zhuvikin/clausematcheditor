@@ -1,23 +1,11 @@
 import React, {Component} from 'react';
+import {AllHtmlEntities} from 'html-entities';
 import './style.css'
-
-function htmlspecialchars(str) {
-    var map = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "\"": "&quot;",
-        "'": "&#39;" // ' -> &apos; for XML only
-    };
-    return str.replace(/[&<>"']/g, function (m) {
-        return map[m];
-    });
-}
 
 export default class Preview extends Component {
     render() {
         const previewContent = JSON.stringify({
-            data: this.props.items.map(i => htmlspecialchars(i.text))
+            data: this.props.items.map(i => AllHtmlEntities.encode(i.text))
         }, null, '  ');
 
         return (
