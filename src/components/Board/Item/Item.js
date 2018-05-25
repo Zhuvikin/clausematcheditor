@@ -4,10 +4,29 @@ import './style.css';
 
 export default class Item extends Component {
     render() {
-        const {text, lastItem, index} = this.props;
+        const {text, lastItem, index, actions} = this.props;
+
+        const onDragStart = (e, index) => {
+            e.dataTransfer.setData('index', index);
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.dropEffect = 'move'
+        };
+
+        const onDrop = (e, to) => {
+            e.preventDefault();
+            const from = parseInt(e.dataTransfer.getData('index'));
+            return actions.moveItem(from, to);
+        };
+
+        const onDragOver = (e) => {
+            e.preventDefault();
+        };
 
         return (
-            <li className="item">
+            <li className="item" draggable={true}
+                onDragStart={(e) => onDragStart(e, index)}
+                onDrop={(e) => onDrop(e, index)}
+                onDragOver={onDragOver}>
                 <table>
                     <tbody>
                     <tr>
@@ -15,14 +34,13 @@ export default class Item extends Component {
                             <ContentEditable
                                 html={text}
                                 disabled={false}
-                                onChange={e => this.props.actions.updateItem(index + 1, e.target.value)}/>
+                                onChange={e => actions.updateItem(index + 1, e.target.value)}/>
                         </td>
-
                         <td className="button-add"
-                            onClick={() => this.props.actions.createItem(index + 1)}>+
+                            onClick={() => actions.createItem(index + 1)}>+
                         </td>
                         <td className={`button-remove ${lastItem ? 'last-item' : ''}`}
-                            onClick={lastItem ? void(0) : () => this.props.actions.deleteItem(index + 1)}>-
+                            onClick={!lastItem ? () => actions.deleteItem(index + 1) : undefined}>-
                         </td>
                     </tr>
                     </tbody>

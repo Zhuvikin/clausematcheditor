@@ -1,7 +1,8 @@
 import {
     CREATE_ITEM,
     UPDATE_ITEM,
-    DELETE_ITEM
+    DELETE_ITEM,
+    MOVE_ITEM
 } from '../constants/ActionTypes'
 
 const initialState = [
@@ -16,8 +17,7 @@ export default function reducer(state = initialState, action) {
             return [
                 ...state.slice(0, action.index),
                 {
-                    text: '',
-                    index: action.index
+                    text: ''
                 },
                 ...state.slice(action.index)
             ];
@@ -37,6 +37,19 @@ export default function reducer(state = initialState, action) {
             return [
                 ...state.slice(0, action.index - 1),
                 ...state.slice(action.index)
+            ];
+
+        case MOVE_ITEM:
+            const removed = [
+                ...state.slice(0, action.fromIndex),
+                ...state.slice(action.fromIndex + 1)
+            ];
+            return [
+                ...removed.slice(0, action.toIndex),
+                {
+                    ...state[action.fromIndex]
+                },
+                ...removed.slice(action.toIndex)
             ];
 
         default:
